@@ -1,4 +1,4 @@
-module github.com/coevin/tau-plugins/headroom
+module github.com/taucentral/headroom
 
 go 1.25.0
 
