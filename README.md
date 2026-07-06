@@ -48,7 +48,7 @@ import (
 	"context"
 	"log"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 	headroom "github.com/taucentral/headroom"
 )
 
@@ -92,7 +92,7 @@ func main() {
 ```
 
 The snippet above is complete. Drop it into `main.go` in a module that
-`require`s both `github.com/coevin/tau` and
+`require`s both `github.com/taucentral/tau` and
 `github.com/taucentral/headroom` and it will compile and run.
 Replace `tau.NewFauxProvider` with a real LLM client for production
 use. See `pkg/tau/doc.go` for the canonical embedding pattern.

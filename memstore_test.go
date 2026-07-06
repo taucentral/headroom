@@ -4,7 +4,7 @@ import (
 	"context"
 	"sync"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // memStore is a minimal in-memory tau.Store for tests. It supports Put,

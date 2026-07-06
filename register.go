@@ -1,7 +1,7 @@
 package headroom
 
 import (
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // RegisterOptions selects which plugin components the embedder wants

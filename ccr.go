@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // ccrRetrieveHint is the sentence appended to req.System on every turn

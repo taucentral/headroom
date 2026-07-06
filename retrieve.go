@@ -7,7 +7,7 @@ import (
 
 	"github.com/invopop/jsonschema"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // retrieveArgs is the parameter schema for the ccr_retrieve tool. It is

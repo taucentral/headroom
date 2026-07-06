@@ -2,13 +2,11 @@ module github.com/taucentral/headroom
 
 go 1.25.0
 
-// The require directive for github.com/coevin/tau is added by task 1.1 of
-// openspec/changes/add-headroom-plugin/tasks.md during /opsx:apply via
-// `go get github.com/coevin/tau@<version>`.
+// This plugin consumes tau as a third-party Go module dependency.
 
 require (
-	github.com/coevin/tau v0.0.0-20260629031156-42e02642c704
 	github.com/invopop/jsonschema v0.14.0
+	github.com/taucentral/tau v0.0.0-20260706085245-48175c6bcdf0
 )
 
 require (

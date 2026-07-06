@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // FailureClassifier is an optional embedder-supplied callback that
@@ -58,7 +58,7 @@ func NewLearnObserver(cache *OriginalCache, history int, classify FailureClassif
 
 // ObserveResponse satisfies tau.ResponseObserver. The observer is
 // non-aborting: any cache write failure is logged and dropped.
-func (o *LearnObserver) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response) error {
+func (o *LearnObserver) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response, streamErr error) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}

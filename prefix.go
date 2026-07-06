@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // PrefixStabilizer is an opt-in RequestMutator that rewrites volatile

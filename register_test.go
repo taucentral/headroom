@@ -3,7 +3,7 @@ package headroom
 import (
 	"testing"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 func TestMiddleware_EmptyOptsReturnsEmptySlice(t *testing.T) {

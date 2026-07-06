@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 func TestPrefixStabilizer_WhitespaceStripped(t *testing.T) {
@@ -92,7 +92,7 @@ func TestOutputObserver_LeadingCeremonyDropped(t *testing.T) {
 			tau.TextContent{Text: "Certainly! Let me help with that. Here is the answer."},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	tc := resp.Content[0].(tau.TextContent)
@@ -118,7 +118,7 @@ func TestOutputObserver_TrailingRestatementDropped(t *testing.T) {
 		"Here is the answer.||In summary, the answer is the answer.",
 		"||", "\n\n",
 	)}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	tc := resp.Content[0].(tau.TextContent)
@@ -151,7 +151,7 @@ func TestOutputObserver_StreamedBytesInvariant(t *testing.T) {
 		},
 	}
 	prev := resp.Content[0].(tau.TextContent).Text
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	now := resp.Content[0].(tau.TextContent).Text
@@ -176,7 +176,7 @@ func TestOutputObserver_ThinkingSectionsDroppedByDefault(t *testing.T) {
 			tau.TextContent{Text: "Sure, <thinking>let me reason about this</thinking>here is the answer."},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -199,7 +199,7 @@ func TestOutputObserver_ThinkingSectionsCustomTags(t *testing.T) {
 			tau.TextContent{Text: "A<reasoning>secret</reasoning>B"},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -216,7 +216,7 @@ func TestOutputObserver_ThinkingSectionsCaseInsensitive(t *testing.T) {
 			tau.TextContent{Text: "A<THINKING>x</THINKING>B"},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -233,7 +233,7 @@ func TestOutputObserver_ThinkingSectionsMultiline(t *testing.T) {
 			tau.TextContent{Text: "A<thinking>line 1\nline 2\nline 3</thinking>B"},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -251,7 +251,7 @@ func TestOutputObserver_ThinkingSectionsUnbalancedLeftIntact(t *testing.T) {
 			tau.TextContent{Text: original},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -271,7 +271,7 @@ func TestOutputObserver_ThinkingSectionsOffByDefault(t *testing.T) {
 			tau.TextContent{Text: original},
 		},
 	}
-	if err := o.ObserveResponse(context.Background(), nil, resp); err != nil {
+	if err := o.ObserveResponse(context.Background(), nil, resp, nil); err != nil {
 		t.Fatalf("ObserveResponse: %v", err)
 	}
 	got := resp.Content[0].(tau.TextContent).Text
@@ -301,7 +301,7 @@ func TestLearnObserver_FailedTurnWritesCorrection(t *testing.T) {
 		},
 		StopReason: tau.StopReason("aborted"),
 	}
-	if err := obs.ObserveResponse(context.Background(), nil, failed); err != nil {
+	if err := obs.ObserveResponse(context.Background(), nil, failed, nil); err != nil {
 		t.Fatalf("observe failed: %v", err)
 	}
 
@@ -317,7 +317,7 @@ func TestLearnObserver_FailedTurnWritesCorrection(t *testing.T) {
 			tau.TextContent{Text: "Running the right tool now."},
 		},
 	}
-	if err := obs.ObserveResponse(context.Background(), req, corrected); err != nil {
+	if err := obs.ObserveResponse(context.Background(), req, corrected, nil); err != nil {
 		t.Fatalf("observe corrected: %v", err)
 	}
 
@@ -356,7 +356,7 @@ func TestLearnObserver_SuccessfulTurnWritesNothing(t *testing.T) {
 			{Role: tau.Role("user"), Content: []tau.ContentBlock{tau.TextContent{Text: "thanks!"}}},
 		},
 	}
-	if err := obs.ObserveResponse(context.Background(), req, resp); err != nil {
+	if err := obs.ObserveResponse(context.Background(), req, resp, nil); err != nil {
 		t.Fatalf("observe: %v", err)
 	}
 	q := tau.Query{KeywordQuery: "correction:", Limit: 32}

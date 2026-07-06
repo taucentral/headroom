@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // postMutationCapture is a test-only ResponseObserver that captures
@@ -27,7 +27,7 @@ type postMutationCapture struct {
 	captured *tau.Request
 }
 
-func (p *postMutationCapture) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response) error {
+func (p *postMutationCapture) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response, streamErr error) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}

@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	tau "github.com/coevin/tau/pkg/tau"
+	tau "github.com/taucentral/tau/pkg/tau"
 )
 
 // OutputObserver is a ResponseObserver that drops ceremony from the
@@ -66,7 +66,7 @@ func NewOutputObserver() *OutputObserver {
 // ObserveResponse satisfies tau.ResponseObserver. The observer never
 // returns a non-nil error unless ctx is cancelled. Any rewrite error
 // leaves the response unchanged.
-func (o *OutputObserver) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response) error {
+func (o *OutputObserver) ObserveResponse(ctx context.Context, req *tau.Request, resp *tau.Response, streamErr error) error {
 	if ctx.Err() != nil {
 		return ctx.Err()
 	}
